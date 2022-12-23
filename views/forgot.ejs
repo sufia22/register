@@ -1,0 +1,26 @@
+<div class="profile-body">
+  <div class="profile-box">
+    <div class="box-content">
+      <h2>Forgot Password</h2>
+      <% if (message) { %>
+      <p><%= message %></p>
+      <% } %>
+      <hr />
+
+      <div class="form-wraper">
+        <form action="/forgot-password" method="POST">
+          <div class="form-group">
+            <input name="email" type="text" placeholder="Enter Email" />
+          </div>
+          <div class="form-group">
+            <button class="resend-link" type="submit">Resend link</button>
+          </div>
+        </form>
+      </div>
+      <div class="utility">
+        <a href="/forget-password">Forgot password</a>
+        <a href="/register">Create an account</a>
+      </div>
+    </div>
+  </div>
+</div>

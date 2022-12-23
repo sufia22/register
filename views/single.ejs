@@ -1,0 +1,87 @@
+<div class="profile-body">
+  <div class="profile-wraper">
+    <div class="profile-info">
+      <%- include ('layouts/info.ejs') %>
+      <hr />
+      <%- include ('layouts/menu.ejs') %>
+    </div>
+    <div class="profile-box">
+      <div class="profile-details">
+        <div class="profile-photo">
+          <% if (profile.photo) { %>
+          <img
+            class="profile-preview"
+            src="./media/user/<%= profile.photo %>"
+            alt=""
+          />
+          <% } else { %>
+          <img class="profile-preview" src="./images/avatar.png" alt="" />
+          <% } %>
+          <div class="user-info">
+            <h2><%= profile.name %></h2>
+            <p><%= profile.email %></p>
+            <p class="follow">
+              <%= user.follower.length %> followers . <%= user.following.length
+              %> following
+            </p>
+          </div>
+        </div>
+        <hr />
+      </div>
+      <div class="profile-tab">
+        <div class="tab">
+          <button class="tablinks active" onclick="openCity(event, 'London')">
+            Gallery
+          </button>
+          <button class="tablinks" onclick="openCity(event, 'Paris')">
+            Follower
+          </button>
+          <button class="tablinks" onclick="openCity(event, 'Tokyo')">
+            Following
+          </button>
+        </div>
+
+        <div id="London" class="tabcontent" active>
+          <div class="gallery-area">
+            <% profile.gallery.reverse().forEach(gallery => { %>
+            <div class="gallery-item">
+              <img src="./media/gallery/<%= gallery %>" alt="" />
+            </div>
+            <% }) %>
+          </div>
+        </div>
+
+        <div id="Paris" class="tabcontent">
+          <h3>Paris</h3>
+          <div class="friends-area">
+            <% profile.follower.forEach(items => { %>
+            <div class="friends-item">
+              <a href="/<%= items._id %> ">
+                <img src="./media/user/<%= items.photo %>" alt="" />
+              </a>
+              <div class="friends-info">
+                <span><%= items.name %></span>
+                <span><%= items.email %></span>
+
+                <% let follow = user.following.some( data => data == items._id )
+                %> <% if (follow) { %>
+                <a class="unfollow" href="/unfollow/<%= items._id %>"
+                  >Unfollow</a
+                >
+                <% } else { %>
+                <a class="follow" href="/follow/<%= items._id %> ">Follow</a>
+                <% } %>
+              </div>
+            </div>
+            <% }) %>
+          </div>
+        </div>
+
+        <div id="Tokyo" class="tabcontent">
+          <h3>Tokyo</h3>
+          <p>Tokyo is the capital of Japan.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
